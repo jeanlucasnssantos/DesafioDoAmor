@@ -159,23 +159,14 @@ function girarParaNumero(numeroAlvo) {
 }
 
 function mostrarPergunta(numero) {
-  // Deixa só o número visível (sem a imagem antiga)
   resultadoPergunta.classList.remove("hidden");
   numeroPerguntaSpan.textContent = numero;
   btnCompartilhar.classList.remove("hidden");
 
-  // Limpa o src antigo imediatamente, para a imagem antiga sumir
+  // Limpa a imagem antiga imediatamente
   imagemPergunta.src = "";
 
-  // Esconde a tag <img> enquanto carrega
-  imagemPergunta.style.display = "none";
-
-  // Quando a nova imagem terminar de carregar, exibe-a
-  imagemPergunta.onload = () => {
-    imagemPergunta.style.display = "block";
-  };
-
-  // Só então atribui o novo src, iniciando o carregamento
+  // Agora atribui o novo src (vai começar a carregar)
   imagemPergunta.src = `images/${numero}.jpg`;
 }
 
