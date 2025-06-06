@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desafio do Amor</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <h1>Desafio do Amor ❤️</h1>
+      <p class="subtitle">Gire a roleta e descubra perguntas especiais</p>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- Tela de entrada -->
+    <section id="telaEntrada" class="card entrada-card">
+      <input type="text" id="inputNome" placeholder="Seu nome" class="input-field" />
+      <input type="text" id="inputSala" placeholder="ID da Sala (ex: JEBIA)" class="input-field" />
+      <button id="btnEntrar" class="btn btn-primary">Criar/Entrar na Sala</button>
+      <p class="aviso">Peça o código da sala para seu par ou crie uma nova!</p>
+    </section>
+
+    <!-- Tela do jogo -->
+    <section id="telaJogo" class="card jogo-card hidden">
+      <div class="info-sala">
+        <p>Você está na sala: <span id="idSalaDisplay" class="highlight-text"></span></p>
+        <p>Jogadores conectados: <span id="jogadoresList" class="highlight-text">-</span></p>
+      </div>
+
+      <!-- Contêiner da roleta -->
+      <div id="roletaContainer" class="roleta-container">
+        <!-- Ponteiro em formato de coração -->
+        <div id="pointer" class="pointer">❤️</div>
+        <canvas id="canvasRoleta"></canvas>
+      </div>
+
+      <!-- Botão Girar fica fora do contêiner da roleta -->
+      <div class="btn-container">
+        <button id="btnGirar" class="btn btn-secondary">🎲 Girar Roleta!</button>
+      </div>
+
+      <div id="resultadoPergunta" class="resultado-card hidden">
+        <h2>Pergunta <span id="numeroPergunta" class="highlight-text"></span></h2>
+        <img id="imagemPergunta" src="" alt="Pergunta" class="pergunta-img" />
+        <button id="btnCompartilhar" class="btn btn-share hidden">📤 Enviar</button>
+      </div>
+
+      <div id="fimPerguntas" class="fim-card hidden">
+        <h2>✨ Você já respondeu todas as perguntas! ✨</h2>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Feito com ♥ por Jean e Beatriz</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="winwheel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
