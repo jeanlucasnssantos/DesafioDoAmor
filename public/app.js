@@ -108,7 +108,7 @@ function marcarPerguntasRespondidas(lista) {
 
 function inicializarRoleta() {
   // Garante que o canvas tenha as mesmas dimensões do contêiner
-  const size = roletaContainer.offsetWidth;
+  const size = roletaContainer.clientWidth;
   canvasRoleta.width = size;
   canvasRoleta.height = size;
 
@@ -120,7 +120,8 @@ function inicializarRoleta() {
       text: i.toString(),
       textFontSize: 24,
       textOrientation: "horizontal",
-      textAlignment: "center"
+      textAlignment: "center",
+      textFillStyle: "#400023"
     });
   }
 

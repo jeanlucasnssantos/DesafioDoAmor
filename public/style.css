@@ -1,5 +1,6 @@
 /* public/style.css */
 
+/* Reset e tipografia */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -7,6 +8,7 @@ body {
   color: #333;
 }
 
+/* --------- Cabeçalho --------- */
 .header {
   background: linear-gradient(90deg, #ff5f6d, #ffc371);
   padding: 20px 0;
@@ -15,7 +17,7 @@ body {
 }
 .header-content h1 {
   margin: 0;
-  font-size: 2.8rem;
+  font-size: 2.5rem; /* Ajustado para tamanho levemente reduzido */
   color: #fff;
   font-weight: 600;
 }
@@ -25,6 +27,7 @@ body {
   color: #ffecec;
 }
 
+/* --------- Layout Principal --------- */
 .main-container {
   max-width: 700px;
   margin: 30px auto;
@@ -39,10 +42,8 @@ body {
   margin-bottom: 25px;
   transition: transform 0.2s;
 }
-.card:hover {
-  transform: translateY(-4px);
-}
 
+/* --------- Tela de Entrada --------- */
 .entrada-card {
   text-align: center;
 }
@@ -66,6 +67,7 @@ body {
   margin-top: 10px;
 }
 
+/* --------- Tela de Jogo --------- */
 .jogo-card {
   text-align: center;
 }
@@ -81,26 +83,37 @@ body {
   font-weight: 600;
 }
 
-/* Contêiner da roleta: mantém proporção 1:1, responsivo e centralizado */
+/* --------- Contêiner da Roleta --------- */
+/* Garante proporção 1:1 (altura = largura) e centraliza horizontalmente */
 .roleta-container {
   position: relative;
   width: 100%;
   max-width: 500px;
   margin: 0 auto 20px auto;
-  aspect-ratio: 1 / 1; /* garante altura = largura */
+}
+.roleta-container::before {
+  content: '';
+  display: block;
+  padding-top: 100%; /* força altura = largura */
 }
 
-/* Canvas ocupa 100% do contêiner (sempre quadrado) */
+/* --------- Canvas da Roleta --------- */
+/* Preenche todo o contêiner quadrado e mantém borda arredondada */
 #canvasRoleta {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border: 4px solid #ff5f6d;
   border-radius: 50%;
   background: #fcfcfc;
   display: block;
+  z-index: 1;
 }
 
-/* Ponteiro em forma de coração */
+/* --------- Ponteiro --------- */
+/* Ponteiro em forma de coração, posicionado acima do canvas */
 .pointer {
   position: absolute;
   top: -30px;
@@ -108,15 +121,39 @@ body {
   transform: translateX(-50%);
   font-size: 48px;
   color: #ff5f6d;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  z-index: 3;
 }
 
-/* Contêiner para posicionar botão abaixo da roleta */
-.btn-container {
-  text-align: center;
-  margin-bottom: 20px;
+/* --------- Botão GIRAR --------- */
+/* Botão redondo, com borda branca, centralizado no meio da roleta */
+.btn-girar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #ffc371;
+  border: 4px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s, transform 0.1s;
+  z-index: 2;
+}
+.btn-girar:hover {
+  background-color: #ffcb7d;
+}
+.btn-girar:active {
+  transform: translate(-50%, -50%) scale(0.97);
 }
 
+/* --------- Outros Botões --------- */
 .btn {
   display: inline-block;
   padding: 12px 24px;
@@ -127,22 +164,12 @@ body {
   transition: background-color 0.2s, transform 0.1s;
   margin-top: 12px;
 }
-.btn:active {
-  transform: scale(0.97);
-}
 .btn-primary {
   background-color: #ff5f6d;
   color: #fff;
 }
 .btn-primary:hover {
   background-color: #ff7b87;
-}
-.btn-secondary {
-  background-color: #ffc371;
-  color: #fff;
-}
-.btn-secondary:hover {
-  background-color: #ffcb7d;
 }
 .btn-share {
   background-color: #3498db;
@@ -155,6 +182,7 @@ body {
   display: none;
 }
 
+/* --------- Resultado da Pergunta --------- */
 .resultado-card {
   text-align: center;
 }
@@ -170,6 +198,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* --------- Fim de Perguntas --------- */
 .fim-card {
   text-align: center;
   padding: 30px 20px;
@@ -179,6 +208,7 @@ body {
   color: #ff5f6d;
 }
 
+/* --------- Rodapé --------- */
 .footer {
   text-align: center;
   padding: 15px 0;
