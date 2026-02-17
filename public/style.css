@@ -1,217 +1,49 @@
-/* public/style.css */
-
-/* Reset e tipografia */
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffe6ea 0%, #fffafa 100%);
-  color: #333;
+/* public/style.css - tema vermelho/dark, romântico */
+:root{
+  --bg:#1b0306; /* muito escuro */
+  --accent:#b72b2b; /* vermelho profundo */
+  --accent-2:#ff6773; /* rosa avermelhado */
+  --card:#2a0a0d;
+  --muted:#c9a9a9;
 }
 
-/* --------- Cabeçalho --------- */
-.header {
-  background: linear-gradient(90deg, #ff5f6d, #ffc371);
-  padding: 20px 0;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-.header-content h1 {
-  margin: 0;
-  font-size: 2.5rem; /* Ajustado para tamanho levemente reduzido */
-  color: #fff;
-  font-weight: 600;
-}
-.subtitle {
-  margin-top: 8px;
-  font-size: 1.1rem;
-  color: #ffecec;
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+html,body,#root{height:100%}
+body{
+  background: radial-gradient(1000px 400px at 10% 10%, rgba(183,43,43,0.12), transparent),
+              linear-gradient(180deg, rgba(8,2,4,1) 0%, rgba(27,3,6,1) 100%);
+  color:var(--muted);
+  -webkit-font-smoothing:antialiased;
+  display:flex;align-items:center;justify-content:center;padding:24px;
 }
 
-/* --------- Layout Principal --------- */
-.main-container {
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 0 20px;
+.stage{width:100%;max-width:960px}
+.card{
+  background:linear-gradient(180deg, rgba(38,9,10,0.9), rgba(26,6,7,0.85));
+  border-radius:16px;padding:28px;box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  border:1px solid rgba(183,43,43,0.08);
 }
+.title{color:var(--accent-2);font-size:28px;margin-bottom:6px}
+.subtitle{color:#f8dfe0;margin-bottom:18px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.controls input{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--muted)}
+.controls button{padding:10px 14px;border-radius:10px;border:none;background:var(--accent);color:white;cursor:pointer}
+.controls button.outline{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+.players{margin-top:14px;list-style:none}
+.players li{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.03);margin-bottom:6px}
 
-.card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  padding: 25px;
-  margin-bottom: 25px;
-  transition: transform 0.2s;
-}
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6));backdrop-filter:blur(4px)}
+.modal.hidden{display:none}
+.modal-card{width:90%;max-width:520px;background:linear-gradient(180deg,#2b0b0d,#1e0708);padding:24px;border-radius:14px;border:1px solid rgba(183,43,43,0.14);text-align:center;position:relative}
+.modal-card .close{position:absolute;right:12px;top:10px;border:none;background:transparent;color:var(--muted);font-size:18px;cursor:pointer}
+.heart{font-size:46px;color:var(--accent-2);transform:scale(1);animation:pulse 1.4s infinite}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+.modal-question{margin-top:10px;padding:10px;background:rgba(255,255,255,0.02);border-radius:8px;color:#ffecec}
+.modal-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.modal-actions button{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:white}
+.credits{margin-top:12px;opacity:0.6;text-align:center}
 
-/* --------- Tela de Entrada --------- */
-.entrada-card {
-  text-align: center;
-}
-.input-field {
-  width: 80%;
-  max-width: 360px;
-  padding: 12px;
-  margin: 10px 0;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.2s;
-}
-.input-field:focus {
-  border-color: #ff5f6d;
-  outline: none;
-}
-.aviso {
-  font-size: 0.9rem;
-  color: #777;
-  margin-top: 10px;
-}
-
-/* --------- Tela de Jogo --------- */
-.jogo-card {
-  text-align: center;
-}
-.info-sala {
-  margin-bottom: 20px;
-}
-.info-sala p {
-  font-size: 1.1rem;
-  margin: 6px 0;
-}
-.highlight-text {
-  color: #ff5f6d;
-  font-weight: 600;
-}
-
-/* --------- Contêiner da Roleta --------- */
-/* Garante proporção 1:1 (altura = largura) e centraliza horizontalmente */
-.roleta-container {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto 20px auto;
-}
-.roleta-container::before {
-  content: '';
-  display: block;
-  padding-top: 100%; /* força altura = largura */
-}
-
-/* --------- Canvas da Roleta --------- */
-/* Preenche todo o contêiner quadrado e mantém borda arredondada */
-#canvasRoleta {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 4px solid #ff5f6d;
-  border-radius: 50%;
-  background: #fcfcfc;
-  display: block;
-  z-index: 1;
-}
-
-/* --------- Ponteiro --------- */
-/* Ponteiro em forma de coração, posicionado acima do canvas */
-.pointer {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 48px;
-  color: #ff5f6d;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-  z-index: 3;
-}
-
-/* --------- Botão GIRAR --------- */
-/* Botão redondo, com borda branca, centralizado no meio da roleta */
-.btn-girar {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  color: #fff;
-  background-color: #ffc371;
-  border: 4px solid #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.2s, transform 0.1s;
-  z-index: 2;
-}
-.btn-girar:hover {
-  background-color: #ffcb7d;
-}
-.btn-girar:active {
-  transform: translate(-50%, -50%) scale(0.97);
-}
-
-/* --------- Outros Botões --------- */
-.btn {
-  display: inline-block;
-  padding: 12px 24px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-  margin-top: 12px;
-}
-.btn-primary {
-  background-color: #ff5f6d;
-  color: #fff;
-}
-.btn-primary:hover {
-  background-color: #ff7b87;
-}
-.btn-share {
-  background-color: #3498db;
-  color: #fff;
-}
-.btn-share:hover {
-  background-color: #2980b9;
-}
-.hidden {
-  display: none;
-}
-
-/* --------- Resultado da Pergunta --------- */
-.resultado-card {
-  text-align: center;
-}
-.resultado-card h2 {
-  font-size: 1.8rem;
-  color: #ff5f6d;
-  margin-bottom: 12px;
-}
-.pergunta-img {
-  max-width: 100%;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* --------- Fim de Perguntas --------- */
-.fim-card {
-  text-align: center;
-  padding: 30px 20px;
-}
-.fim-card h2 {
-  font-size: 1.9rem;
-  color: #ff5f6d;
-}
-
-/* --------- Rodapé --------- */
-.footer {
-  text-align: center;
-  padding: 15px 0;
-  font-size: 0.9rem;
-  color: #777;
+/* Responsividade */
+@media (max-width:600px){
+  .controls{flex-direction:column}
 }
